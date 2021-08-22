@@ -57,11 +57,11 @@ fn build_ui(app: &Application) {
 		.margin_end(0)
 		.build();
 
-    let webview_next = webview.clone();
+	let webview_next = webview.clone();
 	next_button.connect_clicked(move |_x| {
 		webview_next.go_forward();
 	});
-    let webview_back = webview.clone();
+	let webview_back = webview.clone();
 	back_button.connect_clicked(move |_y| {
 		webview_back.go_back();
 	});
@@ -71,5 +71,4 @@ fn build_ui(app: &Application) {
 	window.show_all();
 
 	window.present();
-
 }
