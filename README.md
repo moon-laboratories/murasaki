@@ -1,6 +1,7 @@
 [<img src="https://raw.githubusercontent.com/moon-laboratories/res/master/Murasaki/Murasaki-Small.png" width="300" align="center">](https://github.com/moon-laboratories/res/blob/master/Murasaki/Murasaki-Small.png)
 
 [![CI](https://github.com/moon-laboratories/murasaki/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/moon-laboratories/murasaki/actions?query=workflow%3ACI) [![MPL-2.0 licensed](https://img.shields.io/badge/license-MPL-blue.svg)](./LICENSE)
+
 [Murasaki](https://github.com/moon-laboratories/murasaki) is a Fast, Secure, and Reliable, Webkit based web browser.
 
 # Table of Contents
