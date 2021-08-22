@@ -8,8 +8,6 @@ use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow};
 use gtk::{Box, Button};
 use gtk::prelude::BoxExt;
-use gdk;
-use glib;
 
 use webkit2gtk::{WebContext, WebView};
 use webkit2gtk::traits::WebViewExt;
@@ -40,7 +38,7 @@ fn build_ui(app: &Application) {
 		.build();
 
 	window.add(&vbox);
-	webview.load_uri("https://duckduckgo.com");
+	webview.load_uri("https://duck.com");
 	let back_button = Button::builder()
 		.label("Back")
 		.margin_top(0)

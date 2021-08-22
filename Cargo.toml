@@ -1,5 +1,5 @@
 [package]
-name = "Murasaki"
+name = "murasaki"
 version = "0.1.0"
 edition = "2018"
 readme = "README.md"
@@ -18,3 +18,9 @@ glib = "~0.14"
 [dependencies.gtk]
 version = "~0.14"
 package = "gtk"
+
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
