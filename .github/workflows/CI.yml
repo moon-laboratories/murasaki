@@ -54,7 +54,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install curl
-        run: apt update && apt install -y curl wget sudo 
+        run: |
+        export DEBIAN_FRONTEND=noninteractive
+        ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+        apt-get install -y tzdata
+        dpkg-reconfigure --frontend noninteractive tzdata
+        apt-get install -y curl wget sudo
 
       - name: Install rust
         uses: actions-rs/toolchain@v1
