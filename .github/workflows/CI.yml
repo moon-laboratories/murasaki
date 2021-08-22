@@ -54,7 +54,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install curl
-        run: apt install -y curl wget sudo 
+        run: apt update && apt install -y curl wget sudo 
 
       - name: Install rust
         uses: actions-rs/toolchain@v1
