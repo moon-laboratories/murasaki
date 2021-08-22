@@ -54,7 +54,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install curl
-        run: ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata keyboard-configuration && dpkg-reconfigure --frontend noninteractive tzdata  && dpkg-reconfigure --frontend noninteractive keyboard-interactive && apt-get install -y curl wget sudo
+        run: ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata keyboard-configuration && dpkg-reconfigure --frontend noninteractive tzdata  && apt-get install -y curl wget sudo
 
       - name: Install rust
         uses: actions-rs/toolchain@v1
