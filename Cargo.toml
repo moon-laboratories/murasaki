@@ -4,15 +4,17 @@ version = "0.1.0"
 edition = "2018"
 readme = "README.md"
 license = "MPL-2.0"
-repository = "https://github.com/gradient-labs/murasaki"
+repository = "https://github.com/moon-laboratories/murasaki"
 keywords = ["web", "browser", "web-browser", "webkit"]
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
+webkit2gtk = "~0.14"
+gdk = "~0.14"
+glib = "~0.14"
 
 [dependencies.gtk]
-version = "0.2"
-package = "gtk4"
+version = "~0.14"
+package = "gtk"
