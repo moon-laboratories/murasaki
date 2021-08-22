@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     
     container:
-      image: debian:bullseye
+      image: ubuntu:hirsute
       options: --privileged
 
     strategy:
