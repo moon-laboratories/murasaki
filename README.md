@@ -20,7 +20,7 @@
 Pre-Alpha -- Not usable in any capacity whatsoever, yet. Once it reaches Alpha, it will be usable, at least barely.
 
 ## Usage
-Compile with `cargo`!!
+Compile with `cargo`
 
 #### 1.
 `git clone https://github.com/moon-laboratories/murasaki && cd murasaki`
@@ -29,14 +29,18 @@ Compile with `cargo`!!
 `cargo build --release`
 
 #### 3.
-./target/release/murasaki
+`./target/release/murasaki` or `cargo run --release`
 
 #### !NOTE!
 Building Murasaki requires the following dependencies:
+
 GTK, GLib and Cairo development files.
+
 Rust, Cargo -- Preferably installed via [rustup](https://rustup.rs).
+
 Webkit2gtk development files.
 
+Graphene/gir development files.
 
 ## License
 This software is subject to the terms of the Mozilla Public License, v. 2.0. See `LICENSE`.
