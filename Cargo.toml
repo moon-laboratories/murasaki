@@ -8,8 +8,6 @@ repository = "https://github.com/moon-laboratories/murasaki"
 keywords = ["web", "browser", "web-browser", "webkit"]
 
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 webkit2gtk = "~0.14"
 gdk = "~0.14"
@@ -19,6 +17,9 @@ glib = "~0.14"
 version = "~0.14"
 package = "gtk"
 
+[dependencies.libhandy]
+version = "~0.8"
+features = ["v1_2"]
 
 [profile.release]
 lto = true
