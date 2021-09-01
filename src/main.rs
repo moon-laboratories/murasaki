@@ -5,8 +5,6 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-
-
 use gtk::prelude::*;
 use gtk::Align;
 use gtk::{Application, ApplicationWindow};
@@ -72,38 +70,37 @@ fn build_ui(app: &Application) {
 	hbox.pack_start(&back_button, false, false, 0);
 	hbox.pack_start(&next_button, false, false, 0);
 
-    let (view, bar) = tabs::make_tab_bar();
+	let (view, bar) = tabs::make_tab_bar();
 
-    vbox.add(&bar);
-    vbox.add(&hbox);
-    vbox.add(&view);
+	vbox.add(&bar);
+	vbox.add(&hbox);
+	vbox.add(&view);
 
 	window.add(&vbox);
 
-    view.connect_selected_page_notify(move |_x|{
-        let i = _x.selected_page();
-        let i = match i {
-            Some(s) => s,
-            None => std::process::exit(0),
-        };
-        let webview = i.child();
-        let webview = match webview {
-            Some(s) => s.downcast::<WebView>().unwrap(),
-            None => panic!("Child wasn't a webview, weird."),
-        };
+	view.connect_selected_page_notify(move |_x| {
+		let i = _x.selected_page();
+		let i = match i {
+			Some(s) => s,
+			None => std::process::exit(0),
+		};
+		let webview = i.child();
+		let webview = match webview {
+			Some(s) => s.downcast::<WebView>().unwrap(),
+			None => panic!("Child wasn't a webview, weird."),
+		};
 
-    	let webview_next = webview.clone();
-    	next_button.connect_clicked(move |_x| {
-    		webview_next.go_forward();
-    	});
-    	let webview_back = webview.clone();
-    	back_button.connect_clicked(move |_y| {
-    		webview_back.go_back();
-    	});
+		let webview_next = webview.clone();
+		next_button.connect_clicked(move |_x| {
+			webview_next.go_forward();
+		});
+		let webview_back = webview.clone();
+		back_button.connect_clicked(move |_y| {
+			webview_back.go_back();
+		});
+	});
 
-    });
-
-    tabs::append_new_tab(&view.clone());
+	tabs::append_new_tab(&view.clone());
 
 	window.show_all();
 
@@ -114,7 +111,7 @@ fn build_ui(app: &Application) {
 		None => panic!("No Screen Found"),
 	};
 
-    #[allow(deprecated)]
+	#[allow(deprecated)]
 	let screen_size = (screen.width(), screen.height());
 	window.connect_configure_event(move |x, _y| {
 		if x.size() == screen_size {

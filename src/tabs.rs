@@ -9,16 +9,15 @@ use libhandy::{TabBar, TabView};
 
 fn make_new_tab(context: WebContext) -> WebView {
 	let webview = WebView::with_context(&context);
-  	webview.load_uri("https://duck.com");
-    webview.show();
-    webview
+	webview.load_uri("https://duck.com");
+	webview.show();
+	webview
 }
 
-
 pub fn append_new_tab(vc: &TabView) {
-    let new_context = WebContext::default().unwrap();
-    let temp_ctx = make_new_tab(new_context);
-    vc.append(&temp_ctx);
+	let new_context = WebContext::default().unwrap();
+	let temp_ctx = make_new_tab(new_context);
+	vc.append(&temp_ctx);
 }
 
 pub fn make_tab_bar() -> (TabView, TabBar) {
@@ -37,7 +36,7 @@ pub fn make_tab_bar() -> (TabView, TabBar) {
 	});
 	let vc = view.clone();
 	plus_button.connect_clicked(move |_x| {
-        append_new_tab(&vc);
+		append_new_tab(&vc);
 	});
 
 	return (view, bar);
