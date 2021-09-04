@@ -17,7 +17,8 @@ use webkit2gtk::traits::WebViewExt;
 mod tabs;
 
 fn main() {
-	gtk::init().unwrap();
+	gtk::init().expect("Failed to initialize GTK");
+    libhandy::init();
 	let app = Application::builder()
 		.application_id("io.github.murasaki")
 		.build();
