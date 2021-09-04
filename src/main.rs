@@ -18,7 +18,7 @@ mod tabs;
 
 fn main() {
 	gtk::init().expect("Failed to initialize GTK");
-    libhandy::init();
+	libhandy::init();
 	let app = Application::builder()
 		.application_id("io.github.murasaki")
 		.build();
