@@ -18,7 +18,6 @@ mod tabs;
 
 fn main() {
 	gtk::init().unwrap();
-    libhandy::init();
 	let app = Application::builder()
 		.application_id("io.github.murasaki")
 		.build();

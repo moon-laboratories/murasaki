@@ -9,7 +9,7 @@ use libhandy::{TabBar, TabView};
 
 fn make_new_tab(context: WebContext) -> WebView {
 	let webview = WebView::with_context(&context);
-	webview.load_uri("https://duckduckgo.com");
+	webview.load_uri("https://duck.com");
 	webview.show();
 	webview
 }
