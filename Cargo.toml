@@ -10,6 +10,7 @@ keywords = ["web", "browser", "web-browser", "webkit"]
 
 [dependencies]
 webkit2gtk = "~0.14"
+webkit2gtk-sys = "~0.14"
 gdk = "~0.14"
 glib = "~0.14"
 

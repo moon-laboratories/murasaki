@@ -8,7 +8,7 @@
 use gtk::prelude::*;
 use gtk::Align;
 use gtk::{Application, ApplicationWindow};
-use gtk::{Box, Button};
+use gtk::{Box, Button, Entry};
 use gtk::prelude::{WidgetExt, ButtonExt, BoxExt};
 
 use webkit2gtk::WebView;
@@ -32,6 +32,8 @@ fn build_ui(app: &Application) {
 	let window = ApplicationWindow::builder()
 		.application(app)
 		.title("Murasaki")
+		.default_height(480)
+		.default_width(700)
 		.build();
 	let vbox = Box::builder()
 		.margin_top(0)
@@ -41,6 +43,7 @@ fn build_ui(app: &Application) {
 		.expand(true)
 		.orientation(gtk::Orientation::Vertical)
 		.build();
+
 	let hbox = Box::builder()
 		.margin_top(0)
 		.margin_bottom(0)
@@ -68,8 +71,23 @@ fn build_ui(app: &Application) {
 		.margin_end(0)
 		.expand(false)
 		.build();
+	let screen = window.screen();
+	let screen = match screen {
+		Some(s) => s,
+		None => panic!("No Screen Found"),
+	};
+
+	#[allow(deprecated)]
+	let screen_size = (screen.width(), screen.height());
+
+	let url_bar = Entry::builder()
+		.editable(true)
+		.expand(true)
+		.max_width_chars(screen_size.0)
+		.build();
 	hbox.pack_start(&back_button, false, false, 0);
 	hbox.pack_start(&next_button, false, false, 0);
+	hbox.add(&url_bar);
 
 	let (view, bar) = tabs::make_tab_bar();
 
@@ -91,6 +109,8 @@ fn build_ui(app: &Application) {
 			None => panic!("Child wasn't a webview, weird."),
 		};
 
+		tabs::autoset_title(&webview, i.clone());
+
 		let webview_next = webview.clone();
 		next_button.connect_clicked(move |_x| {
 			webview_next.go_forward();
@@ -99,6 +119,25 @@ fn build_ui(app: &Application) {
 		back_button.connect_clicked(move |_y| {
 			webview_back.go_back();
 		});
+		let load_url_bar = url_bar.clone();
+		load_url_bar.set_progress_fraction(0.0);
+		webview.connect_load_changed(move |slf, _y| {
+			let url = WebViewExt::uri(slf);
+			let url = match url {
+				Some(s) => s,
+				None => panic!("No URL"),
+			};
+			load_url_bar.set_text(url.as_str());
+
+			tabs::autoset_title(&slf, i.clone());
+
+			let load_percentage = WebViewExt::estimated_load_progress(slf);
+			if load_percentage != 1.0 {
+				load_url_bar.set_progress_fraction(load_percentage);
+			} else {
+				load_url_bar.set_progress_fraction(0.0);
+			}
+		});
 	});
 
 	tabs::append_new_tab(&view.clone());
@@ -106,14 +145,6 @@ fn build_ui(app: &Application) {
 	window.show_all();
 
 	window.present();
-	let screen = window.screen();
-	let screen = match screen {
-		Some(s) => s,
-		None => panic!("No Screen Found"),
-	};
-
-	#[allow(deprecated)]
-	let screen_size = (screen.width(), screen.height());
 	window.connect_configure_event(move |x, _y| {
 		if x.size() == screen_size {
 			hbox.set_visible(false);
@@ -124,22 +155,4 @@ fn build_ui(app: &Application) {
 		}
 		false
 	});
-
-	// The following is just for testing purposes, really.
-	/*
-	window.connect_key_press_event(move |_x, y| {
-		if let state = y.state() {
-			println!("Control key pressed 😳: {}", state);
-		}
-		let keyvalue = y.keyval().to_unicode();
-		match keyvalue {
-			Some(v) => {
-				println!("Key Pressed 😳: {}", v)
-			}
-			None => {}
-		};
-
-		Inhibit(false)
-	});
-	*/
 }
