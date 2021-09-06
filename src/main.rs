@@ -111,6 +111,30 @@ fn build_ui(app: &Application) {
 
 		tabs::autoset_title(&webview, i.clone());
 
+		let enter_url_bar = url_bar.clone();
+
+		let enter_webview = webview.clone();
+		enter_url_bar.connect_activate(move |x| {
+			let strcont = x.text();
+			let mut goto_url: String = "".to_owned();
+			if strcont == "" {
+				goto_url.push_str("about:blank")
+			} else if strcont.starts_with("https://") | strcont.starts_with("http://") {
+				goto_url = strcont.to_string();
+			} else {
+				let query = str::replace(&strcont, " ", "+");
+				goto_url.push_str(&format!("https://duckduckgo.com/?q={}", query));
+			}
+			enter_webview.load_uri(&goto_url);
+		});
+
+		let url = WebViewExt::uri(&webview);
+		let url = match url {
+			Some(s) => s,
+			None => panic!("No URL"),
+		};
+		enter_url_bar.set_text(url.as_str());
+
 		let webview_next = webview.clone();
 		next_button.connect_clicked(move |_x| {
 			webview_next.go_forward();
